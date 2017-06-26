@@ -2,6 +2,7 @@
 package com.rac021.jax.service.discovery ;
 
 import java.util.Map ;
+import java.util.Set ;
 import javax.xml.bind.annotation.XmlType ;
 import javax.xml.bind.annotation.XmlRootElement ;
 
@@ -11,19 +12,31 @@ import javax.xml.bind.annotation.XmlRootElement ;
  */
 
  @XmlRootElement
- @XmlType(propOrder = { "serviceName", "security", "params" } )
+ @XmlType(propOrder = { "serviceName", "security", "ciphers" , 
+                        "accepts"    , "params"   }          )
+ 
  public class ServiceDescription {
         
     private  String              serviceName ;
     private  String              security    ;
 
     private  Map<String, String> params      ;
+    
+    private  Set<String>         ciphers     ;
+    private  Set<String>         accepts     ;
         
     
-    public ServiceDescription(String name, String security, Map<String, String> params ) {
+    public ServiceDescription( String name                , 
+                               String security            , 
+                               Map<String, String> params , 
+                               Set<String> ciphers        ,
+                               Set<String> accepts     )  {
+        
         this.serviceName  = name     ;
         this.security     = security ;
         this.params       = params   ;
+        this.accepts      = accepts  ;
+        this.ciphers      = ciphers  ;
     }
     
     public ServiceDescription() {
@@ -53,4 +66,19 @@ import javax.xml.bind.annotation.XmlRootElement ;
         this.params = params ;
     }
 
+    public Set<String> getCiphers() {
+        return ciphers ;
+    }
+
+    public void setCiphers(Set<String> ciphers) {
+        this.ciphers = ciphers ;
+    }
+
+    public Set<String> getAccepts() {
+        return accepts ;
+    }
+
+    public void setAccepts(Set<String> accepts) {
+        this.accepts = accepts ;
+    }
  }
